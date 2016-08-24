@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="function">
+        <item>Function 1</item>
+        <item>Function 2</item>
+        <item>Function 3</item>
+        <item>Function 4</item>
+    </string-array>
+    <string-array name="symptom">
+        <item>Symptom 1</item>
+        <item>Symptom 2</item>
+        <item>Symptom 3</item>
+        <item>Symptom 4</item>
+    </string-array>
+    <string-array name="sparepart">
+        <item>Sparepart 1</item>
+        <item>Sparepart 2</item>
+        <item>Sparepart 3</item>
+        <item>Sparepart 4</item>
+    </string-array>
+
+</resources>

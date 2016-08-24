@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ingenicosms">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".LoginActivity"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MenuHomeActivity"
+            android:label="Menu Utama"
+            android:noHistory="true">
+        </activity>
+
+        <activity android:name=".ReviewJobActivity"
+            android:label="Review Job"
+            android:parentActivityName=".MenuHomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuHomeActivity" />
+        </activity>
+
+        <activity android:name=".DetailReviewJobActivity"
+            android:label="Detail Job"
+            android:parentActivityName=".ReviewJobActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ReviewJobActivity" />
+        </activity>
+
+        <activity android:name=".RepairingActivity"
+            android:label="Repairing"
+            android:parentActivityName=".MenuHomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuHomeActivity" />
+        </activity>
+
+        <activity android:name=".ClosingActivity"
+            android:label="Closing"
+            android:parentActivityName=".RepairingActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RepairingActivity" />
+        </activity>
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" >
+        </activity>
+
+    </application>
+
+</manifest>

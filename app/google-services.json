@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1043887809733",
+    "firebase_url": "https://ingenicosms.firebaseio.com",
+    "project_id": "ingenicosms",
+    "storage_bucket": "ingenicosms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043887809733:android:72154bb691ee0b16",
+        "android_client_info": {
+          "package_name": "com.ingenicosms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043887809733-u0pjld5nk9sd7saef9fm5l3aa9njsan3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ingenicosms",
+            "certificate_hash": "D58A3879D697CE99B360B30C01770C85A307F4A7"
+          }
+        },
+        {
+          "client_id": "1043887809733-r0btf5h2vsgcnihh8q9ng9903tnrlt30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWWSTogXwzpw6gTVKZUsAry3AR1hWIfIE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043887809733-r0btf5h2vsgcnihh8q9ng9903tnrlt30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
