@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+ext.versionMajor = 0
+ext.versionMinor = 2
+ext.versionPatch = 2
+ext.versionClassifier = "BETA"
+
+ext.minimumSdkVersion = 14
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.mybottle.ingenicoversion2"
+        minSdkVersion project.ext.minimumSdkVersion
+        targetSdkVersion 25
+        versionCode generateVersionCode() // 140010203
+        versionName generateVersionName() // 1.2.3-SNAPSHOT
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        buildTypes.each {
+            it.buildConfigField "String" , "INGENICO_API_KEY" ,  "\"ca16b0704ed07c8a54a383002f570cdd\""
+        }
+    }
+}
+
+private Integer generateVersionCode() {
+    return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${getDate()}"
+    if (ext.versionClassifier != null && !ext.versionClassifier.isEmpty()) {
+        versionName = versionName + "-" + ext.versionClassifier
+    }
+    return versionName;
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //ZXing
+    compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+    //Android/Google
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:support-v13:25.2.0'
+    //Firebase
+    compile 'com.google.firebase:firebase-core:10.2.0'
+    //ButterKnife
+    compile 'com.jakewharton:butterknife:8.1.0'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    //Retrofit 2.0
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.android.support:support-vector-drawable:25.2.0'
+}
+
+apply plugin: 'com.google.gms.google-services'

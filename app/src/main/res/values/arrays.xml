@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="category">
+        <item>ALL</item>
+        <item>ICT</item>
+        <item>IWL</item>
+        <item>UN</item>
+    </string-array>
+
+</resources>
