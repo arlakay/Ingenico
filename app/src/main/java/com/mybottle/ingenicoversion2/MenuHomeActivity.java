@@ -77,7 +77,6 @@ public class MenuHomeActivity extends BaseActivity {
         Bundle params = new Bundle();
         params.putString("name", tecId);
         mFirebaseAnalytics.logEvent("main_menu", params);
-
         mFirebaseAnalytics.setUserProperty("home", tecId);
 
         setupToolbar();
@@ -120,6 +119,11 @@ public class MenuHomeActivity extends BaseActivity {
                     if (sessionManager.isLoggedIn()) {
                         sessionManager.setLogin(false);
                         sessionManager.logoutUser();
+
+                        Bundle params = new Bundle();
+                        params.putString("name", tecId);
+                        mFirebaseAnalytics.logEvent("technician_logout", params);
+
                         finish();
                     }
                     // Launching the login activity

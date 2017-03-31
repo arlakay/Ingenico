@@ -109,6 +109,10 @@ public class Login2Activity extends BaseActivity {
                     sessionManager.setLogin(true);
                     sessionManager.createLoginSession(attId, tCode, fName, lName, passw);
 
+                    Bundle params = new Bundle();
+                    params.putString("name", tCode);
+                    mFirebaseAnalytics.logEvent("technician_login", params);
+
                     Intent intent = new Intent(Login2Activity.this, MenuHomeActivity.class);
                     startActivity(intent);
                     finish();

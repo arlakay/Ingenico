@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.mybottle.ingenicoversion2.BuildConfig;
 import com.mybottle.ingenicoversion2.DetailReviewJobActivity;
@@ -46,6 +47,7 @@ public class FragmentHistoryMainboardYesterday extends Fragment implements Swipe
     private List<ReviewJob> reviewJobList = new ArrayList<>();
     private ReviewJobMainboardAdapter adapter;
     private String techCode;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public static FragmentHistoryMainboardYesterday newInstance() {
         return new FragmentHistoryMainboardYesterday();
@@ -62,6 +64,8 @@ public class FragmentHistoryMainboardYesterday extends Fragment implements Swipe
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_history_mainboard_yesterday, container, false);
         ButterKnife.bind(this, rootView);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
         sessionManager = new SessionManager(getActivity());
         sessionManager.checkLogin();
@@ -118,6 +122,11 @@ public class FragmentHistoryMainboardYesterday extends Fragment implements Swipe
                     reviewJobList = response.body().getResults();
                     Log.d(TAG, "Status Code = " + response.code());
                     Log.d(TAG, "Mainboard_Yesterday: " + new Gson().toJson(reviewJobList));
+
+                    Bundle params = new Bundle();
+                    params.putString("name", techCode);
+                    mFirebaseAnalytics.logEvent("history_mainboard_yesterday", params);
+
                     adapter = new ReviewJobMainboardAdapter(reviewJobList, R.layout.list_item_review_job, getActivity(), new ReviewJobMainboardAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(ReviewJob model) {

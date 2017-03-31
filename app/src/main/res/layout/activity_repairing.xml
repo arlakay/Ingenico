@@ -23,7 +23,7 @@
                 android:id="@+id/loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -34,25 +34,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:orientation="vertical" >
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -64,28 +63,31 @@
                         android:id="@+id/txt_sn_edc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/textfield_style"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
                         android:text="Bla bla bla "
-                        android:textSize="16sp"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true">
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true">
 
                     <ImageButton
                         android:id="@+id/btn_edit_edc_sn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_mode_edit_white_36dp"
                         android:background="@drawable/button_rounded"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
+                        android:padding="6dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_mode_edit_white_36dp" />
 
                 </LinearLayout>
 
@@ -94,125 +96,143 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/activity_vertical_margin" >
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Customer:"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/txt_repair_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginBottom="20dp"
-                    android:text="/"
-                    android:textSize="16sp"
-                    android:textColor="#000000"/>
+                    android:background="@drawable/textfield_style"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="-"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/spin_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
                     android:layout_marginBottom="20dp"
-                    android:visibility="gone"/>
+                    android:spinnerMode="dropdown"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Function:"
                     android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/spin_function"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/spinner_style"
+                    android:spinnerMode="dropdown" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Symptom:"
                     android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/spin_symptom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/spinner_style"
+                    android:spinnerMode="dropdown" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Category:"
                     android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/spin_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="28dp"
                     android:layout_marginTop="8dp"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginBottom="28dp" />
+                    android:background="@drawable/spinner_style"
+                    android:spinnerMode="dropdown" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sparepart:"
                     android:textSize="16sp" />
+
                 <com.mybottle.ingenicoversion2.utility.MultiSpinner
                     android:id="@+id/spin_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <com.mybottle.ingenicoversion2.utility.MultiSpinnerSearch
                     android:id="@+id/spin_search_sparepart"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/spinner_style" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Resolution:"
                     android:textSize="16sp" />
+
                 <com.mybottle.ingenicoversion2.utility.MultiSpinner
                     android:id="@+id/spin_resolution"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <com.mybottle.ingenicoversion2.utility.MultiSpinnerSearch
                     android:id="@+id/spin_search_resolution"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/spinner_style" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Close Reason:"
                     android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/spin_close_reason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/spinner_style"
+                    android:spinnerMode="dropdown" />
 
                 <Button
                     android:id="@+id/btn_finish_repairing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:background="@color/primary"
                     android:text="Finish"
-                    android:textStyle="bold"
-                    android:textColor="@color/icons"/>
+                    android:textColor="@color/icons"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

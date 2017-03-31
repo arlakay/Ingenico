@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.mybottle.ingenicoversion2.BuildConfig;
 import com.mybottle.ingenicoversion2.DetailReviewJobActivity;
@@ -46,6 +47,7 @@ public class FragmentHistoryEDCYesterday extends Fragment implements SwipeRefres
     private List<ReviewJob> reviewJobList = new ArrayList<>();
     private ReviewJobEDCAdapter adapter;
     private String techCode;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public static FragmentHistoryEDCYesterday newInstance() {
         return new FragmentHistoryEDCYesterday();
@@ -61,6 +63,8 @@ public class FragmentHistoryEDCYesterday extends Fragment implements SwipeRefres
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_history_edc_yesterday, container, false);
         ButterKnife.bind(this, rootView);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
         sessionManager = new SessionManager(getActivity());
         sessionManager.checkLogin();
@@ -117,6 +121,11 @@ public class FragmentHistoryEDCYesterday extends Fragment implements SwipeRefres
                     reviewJobList = response.body().getResults();
                     Log.d(TAG, "Status Code = " + response.code());
                     Log.d(TAG, "EDC_YESTERDAY: " + new Gson().toJson(reviewJobList));
+
+                    Bundle params = new Bundle();
+                    params.putString("name", techCode);
+                    mFirebaseAnalytics.logEvent("history_EDC_yesterday", params);
+
                     adapter = new ReviewJobEDCAdapter(reviewJobList, R.layout.list_item_review_job,
                             getActivity(), new ReviewJobEDCAdapter.OnItemClickListener() {
                         @Override

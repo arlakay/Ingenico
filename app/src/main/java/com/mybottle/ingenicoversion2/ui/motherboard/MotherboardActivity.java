@@ -232,6 +232,7 @@ public class MotherboardActivity extends BaseActivity {
                     alertDialog.setMessage("Failed Save Start Time, Please Retry!");
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            sessionManager.createMotherboardBarcodeSession("");
                             finish();
                         }
                     });
@@ -248,7 +249,7 @@ public class MotherboardActivity extends BaseActivity {
                 alertDialog.setMessage("Make sure , you're connected to the internet.");
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
+                        sessionManager.createMotherboardBarcodeSession("");
                     }
                 });
                 alertDialog.show();

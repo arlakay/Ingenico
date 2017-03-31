@@ -71,10 +71,13 @@
                     android:id="@+id/et_user_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Technician ID"
+                    android:background="@drawable/textfield__login_style"
+                    android:drawablePadding="10dp"
                     android:drawableTint="@color/accent"
-                    android:drawablePadding="10dp"/>
+                    android:hint="Technician ID"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -88,10 +91,13 @@
                     android:id="@+id/et_password"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textfield__login_style"
                     android:inputType="textPassword"
                     android:hint="Password"
                     android:drawableTint="@color/accent"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"/>
 
             </android.support.design.widget.TextInputLayout>
 
