@@ -31,8 +31,10 @@ import com.mybottle.ingenicoversion2.api.services.ApiService;
 import com.mybottle.ingenicoversion2.model.Job;
 import com.mybottle.ingenicoversion2.utility.SessionManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -63,7 +65,7 @@ public class MotherboardActivity extends BaseActivity {
     String[] ListElements = new String[] {  };
     List<String> ListElementsArrayList ;
     ArrayAdapter<String> adapter ;
-    String motherboardValue, jobIdFromSP;
+    String motherboardValue, jobIdFromSP, currentDateTimeString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +200,7 @@ public class MotherboardActivity extends BaseActivity {
         super.onBackPressed();
     }
 
-    private void startJob(String motherboard){
+    private void startJob(final String motherboard){
         loadingView.setVisibility(View.VISIBLE);
 
         ApiService apiService = RestApi.getClient().create(ApiService.class);
@@ -222,8 +224,13 @@ public class MotherboardActivity extends BaseActivity {
                     handler.postDelayed(runnable, 0);
 //                    reset.setEnabled(false);
 
+                    currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+
                     Bundle params = new Bundle();
-                    params.putString("name", techCode);
+                    params.putString("technician_id", techCode);
+                    params.putString("motherboard_part_number", motherboard);
+                    params.putString("motherboard_start_time", currentDateTimeString);
+
                     mFirebaseAnalytics.logEvent("start_motherboard", params);
 
                 } else {
@@ -257,7 +264,7 @@ public class MotherboardActivity extends BaseActivity {
         });
     }
 
-    private void finishJob(String motherboardCode, String jobId, String problem, String resolution) {
+    private void finishJob(final String motherboardCode, String jobId, String problem, String resolution) {
         final ProgressDialog dialog = ProgressDialog.show(this, "", "loading...");
 
         ApiService apiService = RestApi.getClient().create(ApiService.class);
@@ -279,9 +286,13 @@ public class MotherboardActivity extends BaseActivity {
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             sessionManager.createMotherboardBarcodeSession("");
+                            currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 
                             Bundle params = new Bundle();
-                            params.putString("name", techCode);
+                            params.putString("technician_id", techCode);
+                            params.putString("motherboard_part_number", motherboardCode);
+                            params.putString("motherboard_finish_time", currentDateTimeString);
+
                             mFirebaseAnalytics.logEvent("finish_motherboard", params);
 
                             finish();

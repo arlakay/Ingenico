@@ -39,7 +39,7 @@ public interface ApiService {
 
     //Start Job EDC
     @FormUrlEncoded
-        @POST("technician/startJob")
+    @POST("technician/startJob")
     Call<Job> startJob(@Field("technician_code") String techCode,
                        @Field("terminal_code") String termCode,
                        @Field("X-API-KEY") String apiKey);
@@ -67,7 +67,8 @@ public interface ApiService {
                          @Field("customer_code") String customer,
                          @Field("terminal_code") String termCode,
                          @Field("X-API-KEY") String apiKey,
-                         @Field("closereason") String closeReason);
+                         @Field("closereason") String closeReason,
+                         @Field("brand_code") String brandCode);
 
     //Sparepart
     @GET("sparepart/getAllSparepartByCategoryCode/{category_code}")
@@ -148,8 +149,9 @@ public interface ApiService {
                                    @Field("resolution") String resolution);
 
     // Close Reason
-    @GET("closereason/getAll")
-    Call<CloseReasonResponse> getAllCloseReason(@Query("X-API-KEY") String api_key);
+    @GET("closereason/getAllClosereasonByBrand/{brand_code}")
+    Call<CloseReasonResponse> getAllCloseReason(@Path("brand_code") String brandCode,
+                                                @Query("X-API-KEY") String api_key);
 
     // Close Reason Detail
     @GET("closereason/getClosereason/{closereason_code}")

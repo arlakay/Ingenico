@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +19,9 @@ import com.mybottle.ingenicoversion2.api.RestApi;
 import com.mybottle.ingenicoversion2.api.services.ApiService;
 import com.mybottle.ingenicoversion2.model.Technician;
 import com.mybottle.ingenicoversion2.utility.SessionManager;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +40,7 @@ public class Login2Activity extends BaseActivity {
     @BindView(R.id.et_password)EditText etPass;
     @BindView(R.id.txt_versioning)TextView versioning;
 
-    private String techId, pass;
+    private String techId, pass, currentDateTimeString;
     private SessionManager sessionManager;
     private Boolean exit = false;
 
@@ -109,8 +113,13 @@ public class Login2Activity extends BaseActivity {
                     sessionManager.setLogin(true);
                     sessionManager.createLoginSession(attId, tCode, fName, lName, passw);
 
+                    currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+                    Log.e("JAM LOGOUT", currentDateTimeString);
+
                     Bundle params = new Bundle();
-                    params.putString("name", tCode);
+                    params.putString("technician_id", tCode);
+                    params.putString("technician_name", fName + " " + lName);
+                    params.putString("tech_login_time", currentDateTimeString);
                     mFirebaseAnalytics.logEvent("technician_login", params);
 
                     Intent intent = new Intent(Login2Activity.this, MenuHomeActivity.class);

@@ -17,6 +17,8 @@ import com.mybottle.ingenicoversion2.api.services.ApiService;
 import com.mybottle.ingenicoversion2.model.Job;
 import com.mybottle.ingenicoversion2.utility.SessionManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -39,7 +41,8 @@ public class ClosingActivity extends BaseActivity {
     @BindView(R.id.txt_closing_resolution)TextView txtCloseRsltn;
     @BindView(R.id.txt_closing_close_reason)TextView txtCloseClsReason;
 
-    private String edcSN, valFunc, valSymp, valSpare, techCode, jobId, start, valCstmr, valRsltn, valClsReason;
+    private String edcSN, valFunc, valSymp, valSpare, techCode, jobId, start, valCstmr, valRsltn,
+            valClsReason, currentDateTimeString, brandCodeSP;
     private String cs, fn, sy, sp, rs, cr;
     private String TAG = ClosingActivity.class.getSimpleName();
     private SessionManager sessionManager;
@@ -63,6 +66,7 @@ public class ClosingActivity extends BaseActivity {
         jobId = user.get(SessionManager.KEY_JOB_ID);
         start = user.get(SessionManager.KEY_START_TIME);
         edcSN = user.get(SessionManager.KEY_BARCODE);
+        brandCodeSP = user.get(SessionManager.KEY_BRAND_CODE);
 
         getData();
 
@@ -98,12 +102,12 @@ public class ClosingActivity extends BaseActivity {
     }
 
     private void closingEndJob(final String techCode, String func, String symp, String spare, String jobId,
-                               String resolution, String customer, String terminalCode, String closeReason) {
+                               String resolution, String customer, final String terminalCode, String closeReason) {
         final ProgressDialog dialog = ProgressDialog.show(this, "", "loading...");
 
         ApiService apiService = RestApi.getClient().create(ApiService.class);
 
-        Call<Job> call = apiService.endJob2Hit(techCode, func, symp, spare, jobId, resolution, customer, terminalCode, BuildConfig.INGENICO_API_KEY, closeReason);
+        Call<Job> call = apiService.endJob2Hit(techCode, func, symp, spare, jobId, resolution, customer, terminalCode, BuildConfig.INGENICO_API_KEY, closeReason, brandCodeSP);
         call.enqueue(new Callback<Job>() {
             @Override
             public void onResponse(Call<Job>call, Response<Job> response) {
@@ -119,8 +123,12 @@ public class ClosingActivity extends BaseActivity {
                     alertDialog.setMessage("Finish Job Success");
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+
                             Bundle params = new Bundle();
-                            params.putString("name", techCode);
+                            params.putString("technician_id", techCode);
+                            params.putString("edc_barcode", terminalCode);
+                            params.putString("edc_finish_time", currentDateTimeString);
                             mFirebaseAnalytics.logEvent("finish_repair_edc", params);
 
                             finish();

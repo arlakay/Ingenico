@@ -39,8 +39,10 @@ import com.mybottle.ingenicoversion2.utility.MultiSpinner;
 import com.mybottle.ingenicoversion2.utility.MultiSpinnerSearch;
 import com.mybottle.ingenicoversion2.utility.SessionManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
@@ -74,7 +76,7 @@ public class RepairingActivity extends BaseActivity implements AdapterView.OnIte
     private SessionManager sessionManager;
     private String barcodeValue, techCode, valueFunc, valueSymp, valueCtgry, valueSpare, jobId,
             valueCstmr, valueRsltn, valueClsReason, jobidudahdiparse, brandCodeApi, testSubStr,
-            startTime, brandCodeSP;
+            startTime, brandCodeSP, currentDateTimeString;
 
     private List<Customer> custmrList;
     private List<Function> funcList;
@@ -133,10 +135,10 @@ public class RepairingActivity extends BaseActivity implements AdapterView.OnIte
         clsReasonAr = new ArrayList<String>();
 
         startJob();
-        getFunction();
+//        getFunction();
 //        getCustomer();
-        getResolution();
-        getCloseReason();
+//        getResolution();
+//        getCloseReason();
 
         if (funcAr != null && sympAr != null && spareAr != null && custAr != null && resoAr != null && clsReasonAr != null) {
             setupSpinner();
@@ -598,7 +600,7 @@ public class RepairingActivity extends BaseActivity implements AdapterView.OnIte
         ApiService apiService =
                 RestApi.getClient().create(ApiService.class);
 
-        Call<CloseReasonResponse> call = apiService.getAllCloseReason(BuildConfig.INGENICO_API_KEY);
+        Call<CloseReasonResponse> call = apiService.getAllCloseReason(brandCodeSP, BuildConfig.INGENICO_API_KEY);
         call.enqueue(new Callback<CloseReasonResponse>() {
             @Override
             public void onResponse(Call<CloseReasonResponse>call, Response<CloseReasonResponse> response) {
@@ -684,8 +686,16 @@ public class RepairingActivity extends BaseActivity implements AdapterView.OnIte
 
                     txtRepairCstmr.setText(valueCstmr);
 
+                    getCloseReason();
+                    getFunction();
+                    getResolution();
+
+                    currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+
                     Bundle params = new Bundle();
-                    params.putString("name", techCode);
+                    params.putString("technician_id", techCode);
+                    params.putString("edc_barcode", barcodeValue);
+                    params.putString("edc_start_time", currentDateTimeString);
                     mFirebaseAnalytics.logEvent("start_repair_edc", params);
 
                 } else {

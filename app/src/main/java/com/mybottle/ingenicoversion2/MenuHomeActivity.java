@@ -27,6 +27,8 @@ import com.mybottle.ingenicoversion2.model.Technician;
 import com.mybottle.ingenicoversion2.ui.motherboard.MotherboardActivity;
 import com.mybottle.ingenicoversion2.utility.SessionManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -47,7 +49,7 @@ public class MenuHomeActivity extends BaseActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 0;
     private SessionManager sessionManager;
-    private String attId, tecId, passw;
+    private String attId, tecId, passw, currentDateTimeString;
     private Boolean exit = false;
     private String TAG = MenuHomeActivity.class.getSimpleName();
     private static final int REQUEST_CAMERA = 0;
@@ -75,7 +77,7 @@ public class MenuHomeActivity extends BaseActivity {
         passw = user.get(SessionManager.KEY_PASSWORD);
 
         Bundle params = new Bundle();
-        params.putString("name", tecId);
+        params.putString("technician_id", tecId);
         mFirebaseAnalytics.logEvent("main_menu", params);
         mFirebaseAnalytics.setUserProperty("home", tecId);
 
@@ -120,8 +122,12 @@ public class MenuHomeActivity extends BaseActivity {
                         sessionManager.setLogin(false);
                         sessionManager.logoutUser();
 
+                        currentDateTimeString = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+                        Log.e("JAM LOGOUT", currentDateTimeString);
+
                         Bundle params = new Bundle();
-                        params.putString("name", tecId);
+                        params.putString("technician_id", tecId);
+                        params.putString("tech_logout_time", currentDateTimeString);
                         mFirebaseAnalytics.logEvent("technician_logout", params);
 
                         finish();
